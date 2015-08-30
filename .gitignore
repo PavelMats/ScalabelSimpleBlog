@@ -23,7 +23,7 @@ bld/
 *.ide/
 
 # Private Local Directories
-PrivateConfigs/ 
+PrivateConfigs/
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
