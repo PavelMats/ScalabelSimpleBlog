@@ -5,6 +5,12 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScalabelSimpleBlog", "ScalabelSimpleBlog\ScalabelSimpleBlog.csproj", "{BD422904-6E58-43D1-9CF2-37D36C251B18}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{529303F7-2728-4FEA-BCD5-65948EB2D115}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScalabelSimpleBlog.Data.Entities", "Data\ScalabelSimpleBlog.Data.Entities\ScalabelSimpleBlog.Data.Entities.csproj", "{12FC8275-49E8-4895-94AD-A70DC30814CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScalabelSimpleBlog.Data.Repositories", "Data\ScalabelSimpleBlog.Data.Repositories\ScalabelSimpleBlog.Data.Repositories.csproj", "{69E0323D-2B91-4E3D-B119-03B134A5E5A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +21,20 @@ Global
 		{BD422904-6E58-43D1-9CF2-37D36C251B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD422904-6E58-43D1-9CF2-37D36C251B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD422904-6E58-43D1-9CF2-37D36C251B18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12FC8275-49E8-4895-94AD-A70DC30814CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12FC8275-49E8-4895-94AD-A70DC30814CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12FC8275-49E8-4895-94AD-A70DC30814CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12FC8275-49E8-4895-94AD-A70DC30814CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69E0323D-2B91-4E3D-B119-03B134A5E5A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69E0323D-2B91-4E3D-B119-03B134A5E5A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69E0323D-2B91-4E3D-B119-03B134A5E5A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69E0323D-2B91-4E3D-B119-03B134A5E5A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{12FC8275-49E8-4895-94AD-A70DC30814CF} = {529303F7-2728-4FEA-BCD5-65948EB2D115}
+		{69E0323D-2B91-4E3D-B119-03B134A5E5A3} = {529303F7-2728-4FEA-BCD5-65948EB2D115}
 	EndGlobalSection
 EndGlobal

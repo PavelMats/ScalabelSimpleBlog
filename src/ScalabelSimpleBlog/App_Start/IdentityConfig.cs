@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using ScalabelSimpleBlog.Models;
+using ScalabelSimpleBlog.Data.Entities;
+using ScalabelSimpleBlog.Data.Repositories;
 
 namespace ScalabelSimpleBlog
 {

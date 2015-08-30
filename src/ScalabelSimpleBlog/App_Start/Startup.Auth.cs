@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using ScalabelSimpleBlog.Models;
+using ScalabelSimpleBlog.Data.Entities;
+using ScalabelSimpleBlog.Data.Repositories;
 
 namespace ScalabelSimpleBlog
 {

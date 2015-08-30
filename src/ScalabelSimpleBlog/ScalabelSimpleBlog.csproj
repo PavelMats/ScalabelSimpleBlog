@@ -278,7 +278,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Configs\" />
+    <Folder Include="PrivateConfigs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -287,6 +287,16 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data\ScalabelSimpleBlog.Data.Entities\ScalabelSimpleBlog.Data.Entities.csproj">
+      <Project>{12fc8275-49e8-4895-94ad-a70dc30814cf}</Project>
+      <Name>ScalabelSimpleBlog.Data.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\ScalabelSimpleBlog.Data.Repositories\ScalabelSimpleBlog.Data.Repositories.csproj">
+      <Project>{69e0323d-2b91-4e3d-b119-03b134a5e5a3}</Project>
+      <Name>ScalabelSimpleBlog.Data.Repositories</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
