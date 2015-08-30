@@ -7,6 +7,10 @@ namespace ScalabelSimpleBlog.Entities
 {
     public class Tag
     {
+        public Tag()
+        {
+            this.Articles = new List<Article>();
+        }
         public int Id { get; set; }
 
         public string Name { get; set; }

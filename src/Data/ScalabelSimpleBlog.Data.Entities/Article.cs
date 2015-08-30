@@ -7,8 +7,14 @@ using System.Web;
 namespace ScalabelSimpleBlog.Entities
 {
     public class Article
-    { 
+    {
+        public Article()
+        {
+            this.Tags = new List<Tag>();
+        }
         public int Id { get; set; }
+
+        public string Header { get; set; }
 
         [Column(TypeName = "varchar(MAX)")]
         public string Body { get; set; }
@@ -17,7 +23,7 @@ namespace ScalabelSimpleBlog.Entities
 
         public DateTime CreatedDate { get; set; }
 
-        public DateTime EditedDate { get; set; }
+        public DateTime? EditedDate { get; set; }
 
         public bool IsPublished { get; set; }
 
