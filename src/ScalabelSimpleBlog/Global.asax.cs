@@ -1,4 +1,5 @@
-﻿using ScalabelSimpleBlog.Data.Repositories;
+﻿using ScalabelSimpleBlog.App_Start;
+using ScalabelSimpleBlog.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -22,6 +23,7 @@ namespace ScalabelSimpleBlog
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutomapperConfig.Configure();
         }
     }
 }

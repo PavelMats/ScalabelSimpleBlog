@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.0.4.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.0.4\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -195,6 +199,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AutomapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -210,6 +215,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\HomeIndexModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -287,6 +293,18 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Business\ScalabelSimpleBlog.Business.Dto\ScalabelSimpleBlog.Business.Dto.csproj">
+      <Project>{e1b62595-9699-4e11-b964-4da202a6fbd5}</Project>
+      <Name>ScalabelSimpleBlog.Business.Dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Business\ScalabelSimpleBlog.Business.Mappings\ScalabelSimpleBlog.Business.Mappings.csproj">
+      <Project>{f5e00e95-886f-45a6-8063-5055dc42e753}</Project>
+      <Name>ScalabelSimpleBlog.Business.Mappings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Business\ScalabelSimpleBlog.Business\ScalabelSimpleBlog.Business.csproj">
+      <Project>{e24b7ae1-1286-44d8-9582-5dc9be60e662}</Project>
+      <Name>ScalabelSimpleBlog.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data\ScalabelSimpleBlog.Data.Entities\ScalabelSimpleBlog.Data.Entities.csproj">
       <Project>{12fc8275-49e8-4895-94ad-a70dc30814cf}</Project>
       <Name>ScalabelSimpleBlog.Data.Entities</Name>

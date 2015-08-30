@@ -1,6 +1,10 @@
 using System;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
+using ScalabelSimpleBlog.Data.Repositories;
+using AutoMapper;
+using ScalabelSimpleBlog.Business.Services;
+using ScalabelSimpleBlog.Business.Services.Contracts;
 
 namespace ScalabelSimpleBlog.App_Start
 {
@@ -38,7 +42,10 @@ namespace ScalabelSimpleBlog.App_Start
             // TODO: Register your types here
             // container.RegisterType<IProductRepository, ProductRepository>();
 
-            
+            container.RegisterType<ApplicationDbContext, ApplicationDbContext>();
+            container.RegisterType<IMappingEngine>().RegisterInstance(Mapper.Engine);
+
+            container.RegisterType<IBlogService, BlogService>();
         }
     }
 }
