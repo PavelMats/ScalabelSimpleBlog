@@ -11,6 +11,7 @@ namespace ScalabelSimpleBlog.Business.Mappings
             CreateMap<Article, Dto.HomeCotrollerDto.LatestArticlesDto>();
             CreateMap<Article, Dto.BlogControllerDto.LatestArticlesDto>();
             CreateMap<Article, ArticlesIndexDto>();
+            CreateMap<Article, FullArticleDto>();
         }
     }
 }

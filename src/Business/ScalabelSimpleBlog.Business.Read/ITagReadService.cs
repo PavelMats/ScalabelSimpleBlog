@@ -5,5 +5,7 @@ namespace ScalabelSimpleBlog.Business.Read
     public interface ITagReadService
     {
         IEnumerable<TResult> GetTags<TResult>();
+
+        IEnumerable<TResult> GetTagsByArticle<TResult>(int articleId);
     }
 }

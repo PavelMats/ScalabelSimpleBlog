@@ -8,5 +8,7 @@ namespace ScalabelSimpleBlog.Business.Read
         IEnumerable<TResult> GetArticles<TResult>(GetBlogArticlesModel model);
 
         IEnumerable<TResult> GetLatest<TResult>(int take, int? tagId);
+
+        TResult GetArticleById<TResult>(int articleId);
     }
 }

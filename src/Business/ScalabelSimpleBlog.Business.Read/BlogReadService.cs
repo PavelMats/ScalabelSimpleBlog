@@ -44,6 +44,13 @@ namespace ScalabelSimpleBlog.Business.Read
                                .Project().To<TResult>()
                                .ToList();
         }
+
+        public TResult GetArticleById<TResult>(int articleId)
+        {
+            var article = this.context.Articles.FirstOrDefault(a => a.Id == articleId);
+
+            return this.mapper.Map<TResult>(article);
+        }
     }
 
     public static class ArticlesЙueryableExtension

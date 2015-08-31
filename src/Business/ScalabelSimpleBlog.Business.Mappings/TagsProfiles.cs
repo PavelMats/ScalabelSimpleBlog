@@ -11,6 +11,8 @@ namespace ScalabelSimpleBlog.Business.Mappings
         {
             CreateMap<Tag, TagsListWithCountDto>()
                 .ForMember(dest => dest.ArticlesCount, opt => opt.MapFrom(x => x.Articles.Count()));
+
+            CreateMap<Tag, TagByArticleId>();
         }
     }
 }

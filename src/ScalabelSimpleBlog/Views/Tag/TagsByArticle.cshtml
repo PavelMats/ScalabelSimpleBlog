@@ -1,0 +1,7 @@
+﻿@model ScalabelSimpleBlog.Models.TagControllerModels.TagsByArticleViewModel
+
+
+@foreach (var item in Model.Tags)
+{
+    <a href="@Url.Action("Index", "Blog", new{ tag = item.Id})" class="label label-primary">@item.Name</a>
+}

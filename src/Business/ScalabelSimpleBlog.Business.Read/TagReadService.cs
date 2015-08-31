@@ -19,5 +19,14 @@ namespace ScalabelSimpleBlog.Business.Read
         {
             return context.Tags.Project().To<TResult>().ToList();
         }
+
+        public IEnumerable<TResult> GetTagsByArticle<TResult>(int articleId)
+        {
+            return
+                context.Tags
+                    .Where(x => x.Articles.Any(article => article.Id == articleId))
+                    .ProjectTo<TResult>()
+                    .ToList();
+        }
     }
 }

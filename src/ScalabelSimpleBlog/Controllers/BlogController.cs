@@ -29,6 +29,15 @@ namespace ScalabelSimpleBlog.Controllers
             return View(model);
         }
 
+        public ActionResult Article(int articleId)
+        {
+            var model = new BlogControllerArticleViewModel();
+
+            model.Article = this.blogReadService.GetArticleById<FullArticleDto>(articleId);
+
+            return View(model);
+        }
+
         [ChildActionOnly]
         public ActionResult LatestArticles(int take = 10, int? tag = null)
         {
@@ -38,10 +47,5 @@ namespace ScalabelSimpleBlog.Controllers
 
             return PartialView(model);
         }
-
-        public ActionResult Article(int articleId)
-        {
-            return View();
-        }
-	}
+    }
 }

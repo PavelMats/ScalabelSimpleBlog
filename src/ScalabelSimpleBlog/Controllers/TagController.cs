@@ -21,7 +21,15 @@ namespace ScalabelSimpleBlog.Controllers
             return View();
         }
 
-        
+        public ActionResult TagsByArticle(int articleId)
+        {
+            var model = new TagsByArticleViewModel();
+
+            model.Tags = this.tagReadService.GetTagsByArticle<TagByArticleId>(articleId);
+
+            return PartialView(model);
+        }
+
         public ActionResult TagsCounts(int? tag = null)
         {
             var model = new TagControllerTagsCountsModel

@@ -1,0 +1,37 @@
+﻿@model ScalabelSimpleBlog.Models.BlogControllerModels.BlogControllerArticleViewModel
+
+@{
+    ViewBag.Title = "Article";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-11">
+                <h2>@Model.Article.Header</h2>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-11">
+                @{ Html.RenderAction("TagsByArticle", "Tag");}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-11">
+                @Html.Raw(Model.Article.Body)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+            @{ Html.RenderAction("TagsCounts", "Tag"); }
+        </div>
+        <div class="row">
+            @{ Html.RenderAction("LatestArticles", "Blog");}
+        </div>
+    </div>
+</div>
+
+
