@@ -1,0 +1,10 @@
+﻿@model ScalabelSimpleBlog.Models.BlogControllerModels.BlogControllerLetestArticlesModel
+<h3>Latest posts</h3>
+<div class="list-group">
+    @foreach (var item in Model.Articles)
+    {
+        <a href="@Url.Action("Article", "Blog", new{ item.Id})" class="list-group-item">
+            @item.Header
+        </a>
+    }
+</div>

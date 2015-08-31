@@ -1,9 +1,13 @@
 ﻿@model ScalabelSimpleBlog.Models.TagControllerModels.TagControllerTagsCountsModel
 
+@{
+    var currentTag = Model.CurrentTag.HasValue ? Model.CurrentTag.Value : int.MinValue;
+}
+<h3>Tags</h3>
 <div class="list-group">
     @foreach (var item in Model.TagsList)
     {
-        <a href="@Url.Action("Index", "Blog", new{ tag = item.Id})" class="list-group-item disabled">
+        <a href="@Url.Action("Index", "Blog", new{ tag = item.Id})" class='list-group-item @(currentTag == item.Id ? "active" : string.Empty) '>
             <span class="badge">@item.ArticlesCount</span>
             @item.Name
         </a>

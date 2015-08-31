@@ -13,5 +13,7 @@ namespace ScalabelSimpleBlog.Models.BlogControllerModels
         public IEnumerable<ArticlesIndexDto> Articles { get; set; }
 
         public int CurrentPage { get; set; }
+
+        public int? CurrentTag { get; set; }
     }
 }

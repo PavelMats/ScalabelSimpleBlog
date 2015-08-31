@@ -22,14 +22,15 @@ namespace ScalabelSimpleBlog.Controllers
         }
 
         
-        public ActionResult TagsCounts()
+        public ActionResult TagsCounts(int? tag = null)
         {
             var model = new TagControllerTagsCountsModel
             {
-                TagsList = this.tagReadService.GetTags<TagsListWithCountDto>()
+                TagsList = this.tagReadService.GetTags<TagsListWithCountDto>(),
+                CurrentTag = tag
             };
 
-            return View(model);
+            return PartialView(model);
         }
 
 	}

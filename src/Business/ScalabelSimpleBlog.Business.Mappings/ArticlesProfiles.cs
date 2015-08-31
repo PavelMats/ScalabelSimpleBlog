@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using ScalabelSimpleBlog.Business.Dto.BlogControllerDto;
-using ScalabelSimpleBlog.Business.Dto.HomeCotrollerDto;
 using ScalabelSimpleBlog.Entities;
 
 namespace ScalabelSimpleBlog.Business.Mappings
@@ -9,7 +8,8 @@ namespace ScalabelSimpleBlog.Business.Mappings
     {
         protected override void Configure()
         {
-            CreateMap<Article, LatestArticlesDto>();
+            CreateMap<Article, Dto.HomeCotrollerDto.LatestArticlesDto>();
+            CreateMap<Article, Dto.BlogControllerDto.LatestArticlesDto>();
             CreateMap<Article, ArticlesIndexDto>();
         }
     }

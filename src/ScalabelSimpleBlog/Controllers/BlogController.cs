@@ -22,10 +22,21 @@ namespace ScalabelSimpleBlog.Controllers
             var model = new BlogControllerIndexModel();
             var skip = perPage*(page - 1);
 
-            model.Articles = this.blogReadService.GetArticles<ArticlesIndexDto>(new GetBlogArticlesModel(perPage, skip));
+            model.Articles = this.blogReadService.GetArticles<ArticlesIndexDto>(new GetBlogArticlesModel(perPage, skip, tag));
             model.CurrentPage = page;
+            model.CurrentTag = tag;
 
             return View(model);
+        }
+
+        [ChildActionOnly]
+        public ActionResult LatestArticles(int take = 10, int? tag = null)
+        {
+            var model = new BlogControllerLetestArticlesModel();
+
+            model.Articles = this.blogReadService.GetLatest<LatestArticlesDto>(take, tag);
+
+            return PartialView(model);
         }
 
         public ActionResult Article(int articleId)

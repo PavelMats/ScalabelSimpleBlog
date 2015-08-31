@@ -11,5 +11,7 @@ namespace ScalabelSimpleBlog.Models.TagControllerModels
         }
 
         public IEnumerable<TagsListWithCountDto> TagsList { get; set; }
+
+        public int? CurrentTag { get; set; }
     }
 }
