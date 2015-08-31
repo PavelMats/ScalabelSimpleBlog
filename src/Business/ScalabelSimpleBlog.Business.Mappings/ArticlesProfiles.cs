@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
+using ScalabelSimpleBlog.Business.Dto.BlogControllerDto;
 using ScalabelSimpleBlog.Business.Dto.HomeCotrollerDto;
 using ScalabelSimpleBlog.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScalabelSimpleBlog.Business.Mappings
 {
@@ -14,6 +10,7 @@ namespace ScalabelSimpleBlog.Business.Mappings
         protected override void Configure()
         {
             CreateMap<Article, LatestArticlesDto>();
+            CreateMap<Article, ArticlesIndexDto>();
         }
     }
 }

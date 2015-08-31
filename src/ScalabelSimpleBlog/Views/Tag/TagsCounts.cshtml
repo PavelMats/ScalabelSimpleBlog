@@ -1,0 +1,12 @@
+﻿@model ScalabelSimpleBlog.Models.TagControllerModels.TagControllerTagsCountsModel
+
+<div class="list-group">
+    @foreach (var item in Model.TagsList)
+    {
+        <a href="@Url.Action("Index", "Blog", new{ tag = item.Id})" class="list-group-item disabled">
+            <span class="badge">@item.ArticlesCount</span>
+            @item.Name
+        </a>
+    }
+</div>
+

@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScalabelSimpleBlog", "ScalabelSimpleBlog\ScalabelSimpleBlog.csproj", "{BD422904-6E58-43D1-9CF2-37D36C251B18}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{529303F7-2728-4FEA-BCD5-65948EB2D115}"
@@ -18,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScalabelSimpleBlog.Business.Dto", "Business\ScalabelSimpleBlog.Business.Dto\ScalabelSimpleBlog.Business.Dto.csproj", "{E1B62595-9699-4E11-B964-4DA202A6FBD5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScalabelSimpleBlog.Business.Mappings", "Business\ScalabelSimpleBlog.Business.Mappings\ScalabelSimpleBlog.Business.Mappings.csproj", "{F5E00E95-886F-45A6-8063-5055DC42E753}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScalabelSimpleBlog.Business.Read", "Business\ScalabelSimpleBlog.Business.Read\ScalabelSimpleBlog.Business.Read.csproj", "{50497B69-3846-4F69-9613-03028659A041}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +49,10 @@ Global
 		{F5E00E95-886F-45A6-8063-5055DC42E753}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5E00E95-886F-45A6-8063-5055DC42E753}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5E00E95-886F-45A6-8063-5055DC42E753}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50497B69-3846-4F69-9613-03028659A041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50497B69-3846-4F69-9613-03028659A041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50497B69-3846-4F69-9613-03028659A041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50497B69-3846-4F69-9613-03028659A041}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,5 +63,6 @@ Global
 		{E24B7AE1-1286-44D8-9582-5DC9BE60E662} = {E7FEE9DD-CC1C-45AB-9006-534BE94D4AE8}
 		{E1B62595-9699-4E11-B964-4DA202A6FBD5} = {E7FEE9DD-CC1C-45AB-9006-534BE94D4AE8}
 		{F5E00E95-886F-45A6-8063-5055DC42E753} = {E7FEE9DD-CC1C-45AB-9006-534BE94D4AE8}
+		{50497B69-3846-4F69-9613-03028659A041} = {E7FEE9DD-CC1C-45AB-9006-534BE94D4AE8}
 	EndGlobalSection
 EndGlobal

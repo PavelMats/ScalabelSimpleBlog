@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
+using ScalabelSimpleBlog.Business.Read;
 using ScalabelSimpleBlog.Data.Repositories;
 using AutoMapper;
 using ScalabelSimpleBlog.Business.Services;
@@ -46,6 +47,9 @@ namespace ScalabelSimpleBlog.App_Start
             container.RegisterType<IMappingEngine>().RegisterInstance(Mapper.Engine);
 
             container.RegisterType<IBlogService, BlogService>();
+
+            container.RegisterType<IBlogReadService, BlogReadService>();
+            container.RegisterType<ITagReadService, TagReadService>();
         }
     }
 }

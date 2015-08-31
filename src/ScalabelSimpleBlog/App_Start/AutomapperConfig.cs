@@ -11,6 +11,7 @@ namespace ScalabelSimpleBlog.App_Start
         public static void Configure()
         {
             AutoMapper.Mapper.AddProfile<ArticlesProfiles>();
+            AutoMapper.Mapper.AddProfile<TagsProfiles>();
         }
     }
 }

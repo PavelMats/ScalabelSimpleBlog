@@ -40,8 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlogControllerDto\ArticlesIndexDto.cs" />
     <Compile Include="HomeCotrollerDto\LatestArticlesDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TagControllerDto\TagsListWithCountDto.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

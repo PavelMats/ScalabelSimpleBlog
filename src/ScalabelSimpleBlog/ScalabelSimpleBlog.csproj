@@ -209,15 +209,19 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BlogControllerModels\BlogControllerIndexModel.cs" />
     <Compile Include="Models\HomeIndexModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\TagControllerModels\TagControllerTagsCountsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -278,6 +282,8 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Tag\TagsCounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -300,6 +306,10 @@
     <ProjectReference Include="..\Business\ScalabelSimpleBlog.Business.Mappings\ScalabelSimpleBlog.Business.Mappings.csproj">
       <Project>{f5e00e95-886f-45a6-8063-5055dc42e753}</Project>
       <Name>ScalabelSimpleBlog.Business.Mappings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Business\ScalabelSimpleBlog.Business.Read\ScalabelSimpleBlog.Business.Read.csproj">
+      <Project>{50497B69-3846-4F69-9613-03028659A041}</Project>
+      <Name>ScalabelSimpleBlog.Business.Read</Name>
     </ProjectReference>
     <ProjectReference Include="..\Business\ScalabelSimpleBlog.Business\ScalabelSimpleBlog.Business.csproj">
       <Project>{e24b7ae1-1286-44d8-9582-5dc9be60e662}</Project>

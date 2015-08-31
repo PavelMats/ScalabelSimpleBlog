@@ -26,10 +26,9 @@ namespace ScalabelSimpleBlog.Data.Repositories
                 context.Tags.Add(new Tag { Name = "Sport" });
                 context.Tags.Add(new Tag { Name = "Politics" });
                 context.SaveChanges();
+
+                GenerateArticles(context);
             }
-
-
-            GenerateArticles(context);
         }
 
         private static void GenerateArticles(ApplicationDbContext context)
