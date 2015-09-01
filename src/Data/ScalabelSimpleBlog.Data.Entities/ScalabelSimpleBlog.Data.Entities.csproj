@@ -60,6 +60,7 @@
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="Article.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatiscticArticleView.cs" />
     <Compile Include="Tag.cs" />
   </ItemGroup>
   <ItemGroup>

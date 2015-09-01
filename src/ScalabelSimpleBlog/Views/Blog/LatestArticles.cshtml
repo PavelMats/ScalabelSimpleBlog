@@ -3,7 +3,8 @@
 <div class="list-group">
     @foreach (var item in Model.Articles)
     {
-        <a href="@Url.Action("Article", "Blog", new{ item.Id})" class="list-group-item">
+        <a href="@Url.Action("Article", "Blog", new{articleId = item.Id})" class="list-group-item">
+            <span class="badge">@item.DateFrom.RelativeDate()</span>
             @item.Header
         </a>
     }

@@ -18,6 +18,7 @@ namespace ScalabelSimpleBlog.Data.Repositories
            
         }
 
+        public IDbSet<StatiscticArticleView> StatiscticArticleViews { get; set; } 
 
         public IDbSet<Tag> Tags { get; set; }
 

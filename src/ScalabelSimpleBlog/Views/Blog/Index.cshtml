@@ -62,5 +62,8 @@
         <div class="row">
             @{ Html.RenderAction("LatestArticles", "Blog", new{ tag = Model.CurrentTag});}
         </div>
+        <div class="row">
+            @{ Html.RenderAction("MostPopular", "Blog", new { tag = Model.CurrentTag });}
+        </div>
     </div>
 </div>

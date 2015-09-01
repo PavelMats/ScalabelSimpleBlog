@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using ScalabelSimpleBlog.Data.Entities;
 
 namespace ScalabelSimpleBlog.Entities
 {
@@ -28,5 +29,7 @@ namespace ScalabelSimpleBlog.Entities
         public bool IsPublished { get; set; }
 
         public ICollection<Tag> Tags { get; set; }
+
+        public ICollection<StatiscticArticleView> StatiscticArticleViews { get; set; }
     }
 }

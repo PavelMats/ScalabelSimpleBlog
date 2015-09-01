@@ -50,6 +50,8 @@ namespace ScalabelSimpleBlog.App_Start
 
             container.RegisterType<IBlogReadService, BlogReadService>();
             container.RegisterType<ITagReadService, TagReadService>();
+
+            container.RegisterType<IArticleStatiscticService, ArticleStatiscticService>();
         }
     }
 }

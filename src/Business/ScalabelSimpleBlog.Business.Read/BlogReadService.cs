@@ -26,7 +26,7 @@ namespace ScalabelSimpleBlog.Business.Read
         {
             return this.context.Articles
                        .WhereTag(model.Tag)
-                       .OrderBy(x => x.CreatedDate)
+                       .OrderByDescending(x => x.CreatedDate)
                        .Skip(model.Skip)       
                        .Take(model.Take)
                        .Project()
@@ -38,7 +38,7 @@ namespace ScalabelSimpleBlog.Business.Read
         {
             return this.context.Articles
                                .WhereTag(tag)
-                               .OrderBy(x => x.CreatedDate)
+                               .OrderByDescending(x => x.CreatedDate)
                                .Skip(0)
                                .Take(take)
                                .Project().To<TResult>()
@@ -50,6 +50,18 @@ namespace ScalabelSimpleBlog.Business.Read
             var article = this.context.Articles.FirstOrDefault(a => a.Id == articleId);
 
             return this.mapper.Map<TResult>(article);
+        }
+
+        public IEnumerable<TResult> GetMostPopular<TResult>(int take, int? tagId)
+        {
+            return
+                this.context.Articles
+                    .OrderByDescending(x => x.StatiscticArticleViews.Count())
+                    .WhereTag(tagId)
+                    .Skip(0)
+                    .Take(take)
+                    .ProjectTo<TResult>()
+                    .ToList();
         }
     }
 
