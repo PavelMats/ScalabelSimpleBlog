@@ -94,6 +94,8 @@ namespace ScalabelSimpleBlog.Controllers
         [Authorize]
         public ActionResult UpdateArticle(UpdateArticleRequest article)
         {
+            var model = new UpdateArticleViewModel();
+
             if (this.ModelState.IsValid)
             {
                 this.blogCommandService.UpdateArticle(article.Id, new UpdateArticleModel
@@ -105,7 +107,16 @@ namespace ScalabelSimpleBlog.Controllers
                 });
                 return RedirectToAction("MyArticles");
             }
-            return View();
+
+            model.Article = new UpdateArticleDto
+            {
+                Id = article.Id,
+                Body = article.Body,
+                Header = article.Header,
+                TeaserText = article.TeaserText
+            };
+
+            return View(model);
         }
 
         [ChildActionOnly]
