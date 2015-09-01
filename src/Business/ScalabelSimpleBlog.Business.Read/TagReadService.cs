@@ -17,7 +17,7 @@ namespace ScalabelSimpleBlog.Business.Read
 
         public IEnumerable<TResult> GetTags<TResult>()
         {
-            return context.Tags.Project().To<TResult>().ToList();
+            return context.Tags.OrderByDescending(x => x.Articles.Count()).Project().To<TResult>().ToList();
         }
 
         public IEnumerable<TResult> GetTagsByArticle<TResult>(int articleId)
