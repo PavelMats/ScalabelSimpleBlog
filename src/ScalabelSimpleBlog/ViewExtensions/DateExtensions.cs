@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace ScalabelSimpleBlog.ViewExtensions
 {
@@ -9,6 +6,7 @@ namespace ScalabelSimpleBlog.ViewExtensions
     {
         public static string RelativeDate(this DateTime date)
         {
+            // http://stackoverflow.com/questions/11/how-do-i-calculate-relative-time
             const int SECOND = 1;
             const int MINUTE = 60 * SECOND;
             const int HOUR = 60 * MINUTE;
