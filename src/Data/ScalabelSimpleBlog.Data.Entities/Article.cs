@@ -15,6 +15,10 @@ namespace ScalabelSimpleBlog.Entities
         }
         public int Id { get; set; }
 
+        public ApplicationUser Author { get; set; }
+
+        public string AuthorId { get; set; }
+
         public string Header { get; set; }
 
         [Column(TypeName = "varchar(MAX)")]
@@ -31,5 +35,6 @@ namespace ScalabelSimpleBlog.Entities
         public ICollection<Tag> Tags { get; set; }
 
         public ICollection<StatiscticArticleView> StatiscticArticleViews { get; set; }
+        
     }
 }

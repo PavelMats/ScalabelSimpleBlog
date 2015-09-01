@@ -63,9 +63,14 @@ namespace ScalabelSimpleBlog.Business.Read
                     .ProjectTo<TResult>()
                     .ToList();
         }
+
+        public IEnumerable<TResult> GetArticlesByUser<TResult>(string userId)
+        {
+            return this.context.Articles.Where(a => a.AuthorId == userId).OrderByDescending(x => x.CreatedDate).ProjectTo<TResult>().ToList();
+        }
     }
 
-    public static class ArticlesЙueryableExtension
+    public static class ArticlesQueryableExtension
     {
         public static IQueryable<Article> WhereTag(this IQueryable<Article> articleQuery, int? tagId)
         {

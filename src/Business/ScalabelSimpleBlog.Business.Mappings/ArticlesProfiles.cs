@@ -17,6 +17,11 @@ namespace ScalabelSimpleBlog.Business.Mappings
             CreateMap<Article, FullArticleDto>();
             CreateMap<Article, MostPopularArticleDto>()
                 .ForMember(dest => dest.ClicksCount, opt => opt.MapFrom(x => x.StatiscticArticleViews.Count()));
+
+            CreateMap<Article, MyArticlesDto>()
+                .ForMember(dest => dest.ClicksCount, opt => opt.MapFrom(x => x.StatiscticArticleViews.Count()));
+
+            CreateMap<Article, UpdateArticleDto>();
         }
     }
 }

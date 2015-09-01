@@ -1,4 +1,5 @@
-﻿using ScalabelSimpleBlog.Entities;
+﻿using ScalabelSimpleBlog.Data.Entities;
+using ScalabelSimpleBlog.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -16,7 +17,23 @@ namespace ScalabelSimpleBlog.Data.Repositories
         protected override void Seed(ApplicationDbContext context)
         {
             base.Seed(context);
+            if (context.Users.Count() == 0)
+            {
 
+                // Paswword asdasd
+                for (int i = 0; i < 100; i++)
+                {
+                    context.Users.Add(new ApplicationUser
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Email = string.Format("test{0}@test.com",i),
+                        PasswordHash = "AKmlHZ4oB9EeQUZidcqf2AXBCXhWFOu055EOjzbs4aUIlvYNW03pECNKFFkDyD+9Sg==",
+                        SecurityStamp = Guid.NewGuid().ToString(),
+                        LockoutEnabled = true,
+                        UserName = string.Format("test{0}@test.com", i)
+                    });
+                }
+            }
             if(context.Tags.Count() == 0)
             {
                 context.Tags.Add(new Tag { Name = "IT" });
@@ -28,6 +45,31 @@ namespace ScalabelSimpleBlog.Data.Repositories
                 context.SaveChanges();
 
                 GenerateArticles(context);
+
+                GenerateStatisticForArticles(context);
+            }
+        }
+
+        private void GenerateStatisticForArticles(ApplicationDbContext context)
+        {
+            var random = new Random();
+            var users = context.Users.ToList();
+            var articles = context.Articles.ToList();
+            foreach (var article in articles)
+            {
+                var viewCount = random.Next(5, 150);
+                for (int i = 0; i < viewCount; i++)
+                {
+                    context.StatiscticArticleViews.Add(new StatiscticArticleView
+                    {
+                        ArticleId = article.Id,
+                        Time = DateTime.UtcNow.AddDays(0 - random.Next(5, 100)).AddHours(0 - random.Next(0, 24)).AddMinutes(0 - random.Next(0, 60)),
+                        UserId = random.Next(0, 100) > 15 ? users.Random().Id : null
+                    });
+
+                    
+                }
+                context.SaveChanges();
             }
         }
 
@@ -35,6 +77,7 @@ namespace ScalabelSimpleBlog.Data.Repositories
         {
             var random = new Random();
             var tagsList = context.Tags.ToList();
+            var users = context.Users.ToList();
             int i = 0;
             while(i < 100)
             {
@@ -45,7 +88,8 @@ namespace ScalabelSimpleBlog.Data.Repositories
                 article.TeaserText = SeedExtensions.TeaserTexts.Random();
                 article.Body = SeedExtensions.Body;
                 article.CreatedDate = DateTime.UtcNow.AddDays(0 - random.Next(5, 100));
-                article.IsPublished = random.Next(0, 100) > 20;
+                article.IsPublished = random.Next(0, 100) > 15;
+                article.AuthorId = users.Random().Id;
                 context.Articles.Add(article);
                 i++;
             }

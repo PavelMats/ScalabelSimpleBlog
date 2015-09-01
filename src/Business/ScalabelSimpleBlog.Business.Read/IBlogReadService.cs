@@ -12,5 +12,7 @@ namespace ScalabelSimpleBlog.Business.Read
         TResult GetArticleById<TResult>(int articleId);
 
         IEnumerable<TResult> GetMostPopular<TResult>(int take, int? tagId);
+
+        IEnumerable<TResult> GetArticlesByUser<TResult>(string userId);
     }
 }

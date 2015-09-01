@@ -46,7 +46,7 @@ namespace ScalabelSimpleBlog.App_Start
             container.RegisterType<ApplicationDbContext, ApplicationDbContext>();
             container.RegisterType<IMappingEngine>().RegisterInstance(Mapper.Engine);
 
-            container.RegisterType<IBlogService, BlogService>();
+            container.RegisterType<IBlogCommandService, BlogCommandService>();
 
             container.RegisterType<IBlogReadService, BlogReadService>();
             container.RegisterType<ITagReadService, TagReadService>();

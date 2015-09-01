@@ -1,0 +1,53 @@
+﻿@model ScalabelSimpleBlog.Models.BlogControllerModels.UpdateArticleViewModel
+
+@{
+    ViewBag.Title = "UpdateArticle";
+}
+
+<h2>UpdateArticle</h2>
+
+@using (Html.BeginForm("UpdateArticle", "Blog", null, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Article</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Article.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Article.Header, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Article.Header)
+                @Html.ValidationMessageFor(model => model.Article.Header)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Article.TeaserText, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Article.TeaserText)
+                @Html.ValidationMessageFor(model => model.Article.TeaserText)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Article.Body, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Article.Body)
+                @Html.ValidationMessageFor(model => model.Article.Body)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "MyArticles")
+</div>

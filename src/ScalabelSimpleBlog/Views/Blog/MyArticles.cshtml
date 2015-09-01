@@ -1,0 +1,36 @@
+﻿@model ScalabelSimpleBlog.Models.BlogControllerModels.MyArticlesBlodViewModel
+@{
+    ViewBag.Title = "Ma Articles";
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <h2>My Articles</h2>
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Header</th>
+                    <th>Created Date</th>
+                    <th>Clicks</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Articles)
+                {
+                    <tr>
+                        <th>@item.Header</th>
+                        <th>@item.CreatedDate</th>
+                        <th>@item.ClicksCount</th>
+                        <th>
+                            <a class="btn btn-default" href="@Url.Action("UpdateArticle", "Blog", new { articleId = item.Id})">EDIT</a>
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

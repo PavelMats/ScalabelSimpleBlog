@@ -221,6 +221,9 @@
     <Compile Include="Models\BlogControllerModels\BlogControllerIndexModel.cs" />
     <Compile Include="Models\BlogControllerModels\BlogControllerLetestArticlesModel.cs" />
     <Compile Include="Models\BlogControllerModels\BlogControllerMostPopularViewModel.cs" />
+    <Compile Include="Models\BlogControllerModels\MyArticlesBlodViewModel.cs" />
+    <Compile Include="Models\BlogControllerModels\UpdateArticleRequest.cs" />
+    <Compile Include="Models\BlogControllerModels\UpdateArticleViewModel.cs" />
     <Compile Include="Models\HomeIndexModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -293,6 +296,8 @@
     <Content Include="Views\Blog\Article.cshtml" />
     <Content Include="Views\Tag\TagsByArticle.cshtml" />
     <Content Include="Views\Blog\MostPopular.cshtml" />
+    <Content Include="Views\Blog\MyArticles.cshtml" />
+    <Content Include="Views\Blog\UpdateArticle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

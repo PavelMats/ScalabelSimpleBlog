@@ -1,10 +1,13 @@
 ﻿using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using ScalabelSimpleBlog.Business.Dto.BlogControllerDto;
+using ScalabelSimpleBlog.Business.Models.BlogService;
 using ScalabelSimpleBlog.Business.Read;
 using ScalabelSimpleBlog.Business.Read.Models;
 using ScalabelSimpleBlog.Business.Services;
+using ScalabelSimpleBlog.Business.Services.Contracts;
 using ScalabelSimpleBlog.Models.BlogControllerModels;
+using UpdateArticleRequest = ScalabelSimpleBlog.Models.BlogControllerModels.UpdateArticleRequest;
 
 namespace ScalabelSimpleBlog.Controllers
 {
@@ -12,11 +15,13 @@ namespace ScalabelSimpleBlog.Controllers
     {
         private readonly IBlogReadService blogReadService;
         private readonly IArticleStatiscticService articleStatiscticService;
+        private readonly IBlogCommandService blogCommandService;
 
-        public BlogController(IBlogReadService blogReadService, IArticleStatiscticService articleStatiscticService)
+        public BlogController(IBlogReadService blogReadService, IArticleStatiscticService articleStatiscticService, IBlogCommandService blogCommandService)
         {
             this.blogReadService = blogReadService;
             this.articleStatiscticService = articleStatiscticService;
+            this.blogCommandService = blogCommandService;
         }
 
         //
@@ -51,6 +56,56 @@ namespace ScalabelSimpleBlog.Controllers
             model.Article = this.blogReadService.GetArticleById<FullArticleDto>(articleId);
 
             return View(model);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult MyArticles()
+        {
+            var model = new MyArticlesBlodViewModel();
+
+            var userId = this.User.Identity.GetUserId();
+
+            model.Articles = this.blogReadService.GetArticlesByUser<MyArticlesDto>(userId);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddArticle()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [Authorize]
+        [ActionName("UpdateArticle")]
+        public ActionResult GetForUpdateArtile(int articleId)
+        {
+            var model = new UpdateArticleViewModel();
+
+            model.Article = this.blogReadService.GetArticleById<UpdateArticleDto>(articleId);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult UpdateArticle(UpdateArticleRequest article)
+        {
+            if (this.ModelState.IsValid)
+            {
+                this.blogCommandService.UpdateArticle(article.Id, new UpdateArticleModel
+                {
+                    Body = article.Body,
+                    Header = article.Header,
+                    TeaserText = article.TeaserText,
+                    AuthorId = this.User.Identity.GetUserId()
+                });
+                return RedirectToAction("MyArticles");
+            }
+            return View();
         }
 
         [ChildActionOnly]

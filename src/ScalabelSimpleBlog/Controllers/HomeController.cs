@@ -11,11 +11,11 @@ namespace ScalabelSimpleBlog.Controllers
 {
     public class HomeController : Controller
     {
-        protected IBlogService Blogservice { get; set; }
+        protected IBlogCommandService Blogservice { get; set; }
 
-        public HomeController(IBlogService blogService)
+        public HomeController(IBlogCommandService blogCommandService)
         {
-            this.Blogservice = blogService;
+            this.Blogservice = blogCommandService;
         }
 
         public ActionResult Index()
