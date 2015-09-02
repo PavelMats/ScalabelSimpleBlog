@@ -217,6 +217,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BlogControllerModels\AddArticleRequest.cs" />
     <Compile Include="Models\BlogControllerModels\BlogControllerArticleViewModel.cs" />
     <Compile Include="Models\BlogControllerModels\BlogControllerIndexModel.cs" />
     <Compile Include="Models\BlogControllerModels\BlogControllerLetestArticlesModel.cs" />
@@ -298,6 +299,7 @@
     <Content Include="Views\Blog\MostPopular.cshtml" />
     <Content Include="Views\Blog\MyArticles.cshtml" />
     <Content Include="Views\Blog\UpdateArticle.cshtml" />
+    <Content Include="Views\Blog\AddArticle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

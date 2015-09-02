@@ -7,6 +7,7 @@ using ScalabelSimpleBlog.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ScalabelSimpleBlog.Entities;
 
 namespace ScalabelSimpleBlog.Business.Services
 {
@@ -43,6 +44,19 @@ namespace ScalabelSimpleBlog.Business.Services
                 .Take(take)
                 .Project().To<T>()
                 .ToList();
+        }
+
+        public void CreatArticle(AddArticleModel addArticleModel)
+        {
+            var articleEntity = new Article();
+            articleEntity.AuthorId = addArticleModel.AuthorId;
+            articleEntity.Body = addArticleModel.Body;
+            articleEntity.TeaserText = addArticleModel.TeaderText;
+            articleEntity.Header = addArticleModel.Header;
+            articleEntity.CreatedDate = DateTime.Now;
+
+            context.Articles.Add(articleEntity);
+            context.SaveChanges();
         }
     }
 }

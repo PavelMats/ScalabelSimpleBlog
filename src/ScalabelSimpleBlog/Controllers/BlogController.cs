@@ -71,10 +71,30 @@ namespace ScalabelSimpleBlog.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize]
         public ActionResult AddArticle()
         {
+            var model = new AddArticleRequest();
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddArticle(AddArticleRequest article)
+        {
+            if (this.ModelState.IsValid)
+            {
+                this.blogCommandService.CreatArticle(new AddArticleModel
+                {
+                    Header = article.Header, 
+                    Body = article.Body,
+                    TeaderText = article.TeaserText,
+                    AuthorId =  this.User.Identity.GetUserId()
+                });
+                return RedirectToAction("MyArticles"); 
+            }
+
             return View();
         }
 

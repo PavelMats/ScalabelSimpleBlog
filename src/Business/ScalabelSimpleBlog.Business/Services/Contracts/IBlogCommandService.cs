@@ -12,5 +12,7 @@ namespace ScalabelSimpleBlog.Business.Services.Contracts
         void UpdateArticle(int articleId, UpdateArticleModel articleUpdateModel);
 
         IEnumerable<T> GetLatest<T>(int take);
+
+        void CreatArticle(AddArticleModel addArticleModel);
     }
 }
