@@ -23,7 +23,7 @@
             <div class="col-md-2">
                 @if (prevPage > 0)
                 {
-                    <a class="btn btn-default" href="@Url.Action("Index", "Blog", new { page = prevPage , tag = Model.CurrentTag, search = Model.CurrentSearch })">PREV PAGE</a>
+                    <a class="btn btn-default" href="@Url.Action("Index", "Blog", new { page = prevPage, tag = Model.CurrentTag, search = Model.CurrentSearch })">PREV PAGE</a>
                 }
                 else
                 {
@@ -31,7 +31,7 @@
                 }
             </div>
             <div class="col-md-2 col-md-offset-8">
-                <a class="btn btn-default" href="@Url.Action("Index", "Blog", new { page = nextPage, tag = Model.CurrentTag , search = Model.CurrentSearch})">NEXT PAGE</a>
+                <a class="btn btn-default" href="@Url.Action("Index", "Blog", new { page = nextPage, tag = Model.CurrentTag, search = Model.CurrentSearch })">NEXT PAGE</a>
             </div>
         </div>
 
@@ -52,7 +52,7 @@
             <div class="col-md-2">
                 @if (prevPage > 0)
                 {
-                    <a class="btn btn-default" href="@Url.Action("Index", "Blog", new { page = prevPage, tag = Model.CurrentTag , search = Model.CurrentSearch})">PREV PAGE</a>
+                    <a class="btn btn-default" href="@Url.Action("Index", "Blog", new { page = prevPage, tag = Model.CurrentTag, search = Model.CurrentSearch })">PREV PAGE</a>
                 }
                 else
                 {
@@ -60,7 +60,7 @@
                 }
             </div>
             <div class="col-md-2 col-md-offset-8">
-                <a class="btn btn-default" href="@Url.Action("Index", "Blog", new { page = nextPage , tag = Model.CurrentTag , search = Model.CurrentSearch})">NEXT PAGE</a>
+                <a class="btn btn-default" href="@Url.Action("Index", "Blog", new { page = nextPage, tag = Model.CurrentTag, search = Model.CurrentSearch })">NEXT PAGE</a>
             </div>
         </div>
 
@@ -70,10 +70,13 @@
             @{ Html.RenderAction("TagsCounts", "Tag"); }
         </div>
         <div class="row">
-            @{ Html.RenderAction("LatestArticles", "Blog", new{ tag = Model.CurrentTag, days = 14});}
+            @{ Html.RenderAction("LatestArticles", "Blog", new { tag = Model.CurrentTag, days = 14 });}
         </div>
         <div class="row">
             @{ Html.RenderAction("MostPopular", "Blog", new { tag = Model.CurrentTag });}
+        </div>
+        <div class="row">
+            @{ Html.RenderAction("MostCommented", "Blog", new { tag = Model.CurrentTag, days = 14 });}
         </div>
     </div>
 </div>

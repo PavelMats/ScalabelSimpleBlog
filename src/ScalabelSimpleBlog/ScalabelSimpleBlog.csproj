@@ -222,6 +222,7 @@
     <Compile Include="Models\BlogControllerModels\BlogControllerArticleViewModel.cs" />
     <Compile Include="Models\BlogControllerModels\BlogControllerIndexModel.cs" />
     <Compile Include="Models\BlogControllerModels\BlogControllerLetestArticlesModel.cs" />
+    <Compile Include="Models\BlogControllerModels\BlogControllerMostCommentedModel.cs" />
     <Compile Include="Models\BlogControllerModels\BlogControllerMostPopularViewModel.cs" />
     <Compile Include="Models\BlogControllerModels\MyArticlesBlodViewModel.cs" />
     <Compile Include="Models\BlogControllerModels\UpdateArticleRequest.cs" />
@@ -302,6 +303,7 @@
     <Content Include="Views\Blog\MyArticles.cshtml" />
     <Content Include="Views\Blog\UpdateArticle.cshtml" />
     <Content Include="Views\Blog\AddArticle.cshtml" />
+    <Content Include="Views\Blog\MostCommented.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

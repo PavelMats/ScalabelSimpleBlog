@@ -46,6 +46,16 @@ namespace ScalabelSimpleBlog.Business.Read
                                .ToList();
         }
 
+        public IEnumerable<TResult> GetLatestComments<TResult>(int take, int? tagId)
+        {
+            return this.context.Comments.OrderByDescending(x => x.CreatedDate)
+                .Where(x => (tagId == null || x.Article.Tags.Any(t => t.Id == tagId.Value)))
+                .Skip(0)
+                .Take(take)
+                .ProjectTo<TResult>()
+                .ToList();
+        }
+
         public TResult GetArticleById<TResult>(int articleId)
         {
             var article = this.context.Articles.FirstOrDefault(a => a.Id == articleId);
@@ -76,6 +86,19 @@ namespace ScalabelSimpleBlog.Business.Read
             return this.context.Comments.Where(x => x.ArticleId == articleId)
                 .OrderByDescending(x => x.CreatedDate)
                 .ProjectTo<TResult>().ToList();
+        }
+
+        public IEnumerable<TResult> GetMostCommented<TResult>(int take, int? tag, int? days)
+        {
+            return this.context.Articles
+                .OrderByDescending(x => x.Comments.Count())
+                .WhereTag(tag)
+                .WhereDays(days)
+                .Skip(0)
+                .Take(take)
+                .Project()
+                .To<TResult>()
+                .ToList();
         }
     }
 
