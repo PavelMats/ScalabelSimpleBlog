@@ -129,7 +129,13 @@ namespace ScalabelSimpleBlog.Business.Read
         {
             if (!string.IsNullOrEmpty(search))
             {
-                articleQuery = articleQuery.Where(x => x.Header.Contains(search));
+                articleQuery =
+                    articleQuery.Where(
+                        x =>
+                            x.Header.Contains(search) || 
+                            x.TeaserText.Contains(search) || 
+                            x.Body.Contains(search) ||
+                            x.Tags.Any(t => t.Name.Contains(search)));
             }
             return articleQuery;
         }

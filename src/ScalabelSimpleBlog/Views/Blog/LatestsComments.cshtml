@@ -1,7 +1,7 @@
 ﻿@model ScalabelSimpleBlog.Models.BlogControllerModels.BlogControllerLatestsCommentsViewModel
 
 <h3>Latest comments</h3>
-<div class="list-group">
+<div class="col-md-12">
     @foreach (var item in Model.Comments)
     {
         <p>
@@ -10,7 +10,7 @@
         <p>
             Author: @item.AuthorName
         </p>
-        <a href="@Url.Action("Article", "Blog", new{articleId = item.ArticleId})" class="list-group-item">
+        <a href="@Url.Action("Article", "Blog", new{articleId = item.ArticleId})" class="">
             <span class="badge">@item.CreatedDate.RelativeDate()</span>
             @item.ArticleHeader
         </a>

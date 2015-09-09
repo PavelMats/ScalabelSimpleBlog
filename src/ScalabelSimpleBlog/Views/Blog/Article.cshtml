@@ -26,11 +26,11 @@
         </div>
         <div class="row">
             <div class="col-md-11">
-                  @using (Html.BeginForm("AddComment", "Blog", null, FormMethod.Post))
+                @using (Html.BeginForm("AddComment", "Blog", null, FormMethod.Post))
                 {
                     @Html.Hidden("Comment.ArticleId", Model.Comment.ArticleId)
                     <input type="text" class="form-control" name="Comment.Body" value="" />
-                    <input type="submit"/>
+                    <input type="submit" />
                 }
             </div>
         </div>
@@ -51,6 +51,9 @@
         </div>
         <div class="row">
             @{ Html.RenderAction("LatestArticles", "Blog");}
+        </div>
+        <div class="row">
+            @{ Html.RenderAction("LatestsComments", "Blog");}
         </div>
     </div>
 </div>
