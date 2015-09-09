@@ -62,11 +62,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\BlogService\AddArticleModel.cs" />
+    <Compile Include="Models\BlogService\AddCommentModel.cs" />
     <Compile Include="Models\BlogService\UpdateArticleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ArticleStatiscticService.cs" />
     <Compile Include="Services\BlogCommandService.cs" />
     <Compile Include="Services\Contracts\IBlogCommandService.cs" />
     <Compile Include="Services\IArticleStatiscticService.cs" />
+    <Compile Include="Services\UserStatitisticService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Data\ScalabelSimpleBlog.Data.Entities\ScalabelSimpleBlog.Data.Entities.csproj">

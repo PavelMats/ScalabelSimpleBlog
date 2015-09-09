@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using ScalabelSimpleBlog.Business.Services;
 using ScalabelSimpleBlog.Models;
 using ScalabelSimpleBlog.Data.Entities;
 
@@ -16,11 +17,13 @@ namespace ScalabelSimpleBlog.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private readonly IUserStatitisticService userStatitisticService;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+        public AccountController(IUserStatitisticService userStatitisticService)
         {
+            this.userStatitisticService = userStatitisticService;
         }
 
         //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -80,6 +83,7 @@ namespace ScalabelSimpleBlog.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    this.userStatitisticService.Log(this.User.Identity.GetUserId());
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

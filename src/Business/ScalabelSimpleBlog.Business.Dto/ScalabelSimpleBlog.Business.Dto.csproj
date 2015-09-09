@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlogControllerDto\ArticleCommantDto.cs" />
     <Compile Include="BlogControllerDto\ArticlesIndexDto.cs" />
     <Compile Include="BlogControllerDto\FullArticleDto.cs" />
     <Compile Include="BlogControllerDto\LatestArticlesDto.cs" />

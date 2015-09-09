@@ -26,15 +26,16 @@ namespace ScalabelSimpleBlog.Controllers
 
         //
         // GET: /Blog/
-        public ActionResult Index(int page = 1, int perPage = 20, int? tag = null)
+        public ActionResult Index(int page = 1, int perPage = 20, int? tag = null, string search = null)
         {
 
             var model = new BlogControllerIndexModel();
             var skip = perPage*(page - 1);
 
-            model.Articles = this.blogReadService.GetArticles<ArticlesIndexDto>(new GetBlogArticlesModel(perPage, skip, tag));
+            model.Articles = this.blogReadService.GetArticles<ArticlesIndexDto>(new GetBlogArticlesModel(perPage, skip, tag, search));
             model.CurrentPage = page;
             model.CurrentTag = tag;
+            model.CurrentSearch = search;
 
             return View(model);
         }
@@ -55,6 +56,8 @@ namespace ScalabelSimpleBlog.Controllers
 
             model.Article = this.blogReadService.GetArticleById<FullArticleDto>(articleId);
 
+            model.Comments = this.blogReadService.GetCommantsForArticle<ArticleCommantDto>(articleId);
+            model.Comment = new AddCommentRequest {ArticleId = articleId};
             return View(model);
         }
 
@@ -139,12 +142,33 @@ namespace ScalabelSimpleBlog.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddComment(AddCommentRequest comment)
+        {
+            this.blogCommandService.CreatComment(new AddCommentModel
+            {
+                ArticleId = comment.ArticleId,
+                Body = comment.Body, 
+                AuthorId = this.User.Identity.GetUserId()
+            });
+
+            return RedirectToAction("Article", new {articleId = comment.ArticleId});
+        }
+
         [ChildActionOnly]
-        public ActionResult MostPopular(int take = 10, int? tag = null)
+        public ActionResult MostCommented(int take = 5, int? tag = null)
+        {
+            var model = BlogControllerMostCommentedModel();
+        }
+
+
+        [ChildActionOnly]
+        public ActionResult MostPopular(int take = 10, int? tag = null, int? days = 14)
         {
             var model = new BlogControllerMostPopularViewModel();
 
-            model.Articles = this.blogReadService.GetMostPopular<MostPopularArticleDto>(take, tag);
+            model.Articles = this.blogReadService.GetMostPopular<MostPopularArticleDto>(take, tag, days);
 
             return PartialView(model);
         }

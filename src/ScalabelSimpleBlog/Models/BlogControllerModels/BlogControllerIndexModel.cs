@@ -15,5 +15,7 @@ namespace ScalabelSimpleBlog.Models.BlogControllerModels
         public int CurrentPage { get; set; }
 
         public int? CurrentTag { get; set; }
+
+        public string CurrentSearch { get; set; }
     }
 }

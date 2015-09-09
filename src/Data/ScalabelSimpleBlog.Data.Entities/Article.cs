@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,7 @@ namespace ScalabelSimpleBlog.Entities
         public Article()
         {
             this.Tags = new List<Tag>();
+            this.Comments = new List<Comment>();
         }
         public int Id { get; set; }
 
@@ -32,7 +34,11 @@ namespace ScalabelSimpleBlog.Entities
 
         public bool IsPublished { get; set; }
 
+        public Guid Stamp { get; set; }
+
         public ICollection<Tag> Tags { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
 
         public ICollection<StatiscticArticleView> StatiscticArticleViews { get; set; }
         
