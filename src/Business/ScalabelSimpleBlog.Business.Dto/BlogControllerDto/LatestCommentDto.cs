@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScalabelSimpleBlog.Business.Dto.BlogControllerDto
 {
@@ -13,5 +9,9 @@ namespace ScalabelSimpleBlog.Business.Dto.BlogControllerDto
         public string Body { get; set; }
 
         public string ArticleHeader { get; set; }
+
+        public int ArticleId { get; set; }
+
+        public DateTime CreatedDate { get; set; }
     }
 }

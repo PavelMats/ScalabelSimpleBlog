@@ -70,6 +70,9 @@
             @{ Html.RenderAction("TagsCounts", "Tag"); }
         </div>
         <div class="row">
+            @{ Html.RenderAction("LatestsComments", "Blog", new {tag = Model.CurrentTag});}
+        </div>
+        <div class="row">
             @{ Html.RenderAction("LatestArticles", "Blog", new { tag = Model.CurrentTag, days = 14 });}
         </div>
         <div class="row">

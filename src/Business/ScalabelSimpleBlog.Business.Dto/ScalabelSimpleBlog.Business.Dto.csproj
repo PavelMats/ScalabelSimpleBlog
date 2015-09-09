@@ -44,6 +44,7 @@
     <Compile Include="BlogControllerDto\ArticlesIndexDto.cs" />
     <Compile Include="BlogControllerDto\FullArticleDto.cs" />
     <Compile Include="BlogControllerDto\LatestArticlesDto.cs" />
+    <Compile Include="BlogControllerDto\LatestCommentDto.cs" />
     <Compile Include="BlogControllerDto\MostCommentedArticleDto.cs" />
     <Compile Include="BlogControllerDto\MostPopularArticleDto.cs" />
     <Compile Include="BlogControllerDto\MyArticlesDto.cs" />
