@@ -26,6 +26,7 @@ namespace ScalabelSimpleBlog.Business.Read
         {
             return this.context.Articles
                        .WhereTag(model.Tag)
+                       .WhereSearch(model.Search)
                        .OrderByDescending(x => x.CreatedDate)
                        .Skip(model.Skip)       
                        .Take(model.Take)
@@ -45,6 +46,16 @@ namespace ScalabelSimpleBlog.Business.Read
                                .ToList();
         }
 
+        public IEnumerable<TResult> GetLatestComments<TResult>(int take, int? tagId)
+        {
+            return this.context.Comments.OrderByDescending(x => x.CreatedDate)
+                .Where(x => (tagId == null || x.Article.Tags.Any(t => t.Id == tagId.Value)))
+                .Skip(0)
+                .Take(take)
+                .ProjectTo<TResult>()
+                .ToList();
+        }
+
         public TResult GetArticleById<TResult>(int articleId)
         {
             var article = this.context.Articles.FirstOrDefault(a => a.Id == articleId);
@@ -52,12 +63,13 @@ namespace ScalabelSimpleBlog.Business.Read
             return this.mapper.Map<TResult>(article);
         }
 
-        public IEnumerable<TResult> GetMostPopular<TResult>(int take, int? tagId)
+        public IEnumerable<TResult> GetMostPopular<TResult>(int take, int? tagId, int? days)
         {
             return
                 this.context.Articles
                     .OrderByDescending(x => x.StatiscticArticleViews.Count())
                     .WhereTag(tagId)
+                    .WhereDays(days)
                     .Skip(0)
                     .Take(take)
                     .ProjectTo<TResult>()
@@ -68,15 +80,62 @@ namespace ScalabelSimpleBlog.Business.Read
         {
             return this.context.Articles.Where(a => a.AuthorId == userId).OrderByDescending(x => x.CreatedDate).ProjectTo<TResult>().ToList();
         }
+
+        public IEnumerable<TResult> GetCommantsForArticle<TResult>(int articleId)
+        {
+            return this.context.Comments.Where(x => x.ArticleId == articleId)
+                .OrderByDescending(x => x.CreatedDate)
+                .ProjectTo<TResult>().ToList();
+        }
+
+        public IEnumerable<TResult> GetMostCommented<TResult>(int take, int? tag, int? days)
+        {
+            return this.context.Articles
+                .OrderByDescending(x => x.Comments.Count())
+                .WhereTag(tag)
+                .WhereDays(days)
+                .Skip(0)
+                .Take(take)
+                .Project()
+                .To<TResult>()
+                .ToList();
+        }
     }
 
     public static class ArticlesQueryableExtension
     {
+
+        public static IQueryable<Article> WhereDays(this IQueryable<Article> articleQuery, int? days)
+        {
+            if (days.HasValue)
+            {
+                var date = DateTime.UtcNow.AddDays(- days.Value);
+
+                articleQuery = articleQuery.Where(x => x.CreatedDate > date);
+            }
+            return articleQuery;            
+        }
+
         public static IQueryable<Article> WhereTag(this IQueryable<Article> articleQuery, int? tagId)
         {
             if (tagId.HasValue)
             {
                 articleQuery = articleQuery.Where(x => x.Tags.Any(tag => tag.Id == tagId));
+            }
+            return articleQuery;
+        }
+
+        public static IQueryable<Article> WhereSearch(this IQueryable<Article> articleQuery, string search)
+        {
+            if (!string.IsNullOrEmpty(search))
+            {
+                articleQuery =
+                    articleQuery.Where(
+                        x =>
+                            x.Header.Contains(search) || 
+                            x.TeaserText.Contains(search) || 
+                            x.Body.Contains(search) ||
+                            x.Tags.Any(t => t.Name.Contains(search)));
             }
             return articleQuery;
         }

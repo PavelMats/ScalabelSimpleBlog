@@ -9,5 +9,9 @@ namespace ScalabelSimpleBlog.Models.BlogControllerModels
     public class BlogControllerArticleViewModel
     {
         public FullArticleDto Article { get; set; }
+
+        public IEnumerable<ArticleCommantDto> Comments { get; set; }
+
+        public AddCommentRequest Comment { get; set; }
     }
 }

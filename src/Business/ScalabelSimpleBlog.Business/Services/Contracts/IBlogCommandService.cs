@@ -14,5 +14,7 @@ namespace ScalabelSimpleBlog.Business.Services.Contracts
         IEnumerable<T> GetLatest<T>(int take);
 
         void CreatArticle(AddArticleModel addArticleModel);
+
+        void CreatComment(AddCommentModel addCommentModel);
     }
 }

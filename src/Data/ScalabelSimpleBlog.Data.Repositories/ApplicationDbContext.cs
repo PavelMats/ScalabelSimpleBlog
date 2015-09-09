@@ -15,14 +15,18 @@ namespace ScalabelSimpleBlog.Data.Repositories
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-           
+            this.Configuration.LazyLoadingEnabled = false;
         }
 
         public IDbSet<StatiscticArticleView> StatiscticArticleViews { get; set; } 
 
+        public IDbSet<StatiscticUserLogin> StatiscticUserLogins { get; set; }
+
         public IDbSet<Tag> Tags { get; set; }
 
         public IDbSet<Article> Articles { get; set; }
+
+        public IDbSet<Comment>  Comments { get; set; }
 
         public static ApplicationDbContext Create()
         {

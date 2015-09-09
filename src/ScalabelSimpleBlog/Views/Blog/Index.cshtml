@@ -11,10 +11,19 @@
             <h3>Posts</h3>
         </div>
         <div class="row">
+            <div class="col-md-10">
+                @using (Html.BeginForm("Index", "Blog", null, FormMethod.Get))
+                {
+                    <input type="hidden" name="tag" value="@Model.CurrentTag"/>
+                    <input type="text" class="form-control" name="search" value="" />
+                }
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-2">
                 @if (prevPage > 0)
                 {
-                    <a class="btn btn-default" href="@Url.Action("Index", "Blog", new { page = prevPage , tag = Model.CurrentTag })">PREV PAGE</a>
+                    <a class="btn btn-default" href="@Url.Action("Index", "Blog", new { page = prevPage, tag = Model.CurrentTag, search = Model.CurrentSearch })">PREV PAGE</a>
                 }
                 else
                 {
@@ -22,7 +31,7 @@
                 }
             </div>
             <div class="col-md-2 col-md-offset-8">
-                <a class="btn btn-default" href="@Url.Action("Index", "Blog", new { page = nextPage, tag = Model.CurrentTag })">NEXT PAGE</a>
+                <a class="btn btn-default" href="@Url.Action("Index", "Blog", new { page = nextPage, tag = Model.CurrentTag, search = Model.CurrentSearch })">NEXT PAGE</a>
             </div>
         </div>
 
@@ -34,6 +43,7 @@
                     <p>
                         @item.TeaserText
                     </p>
+                    <p>Author: @item.Author  Clicks: @item.ClicksCount  Comment: @item.CommentsCount</p>
                     <p><a class="btn btn-default" href="@Url.Action("Article", "Blog", new { articleId = item.Id })">More &raquo;</a></p>
                 </div>
             </div>
@@ -42,7 +52,7 @@
             <div class="col-md-2">
                 @if (prevPage > 0)
                 {
-                    <a class="btn btn-default" href="@Url.Action("Index", "Blog", new { page = prevPage, tag = Model.CurrentTag })">PREV PAGE</a>
+                    <a class="btn btn-default" href="@Url.Action("Index", "Blog", new { page = prevPage, tag = Model.CurrentTag, search = Model.CurrentSearch })">PREV PAGE</a>
                 }
                 else
                 {
@@ -50,7 +60,7 @@
                 }
             </div>
             <div class="col-md-2 col-md-offset-8">
-                <a class="btn btn-default" href="@Url.Action("Index", "Blog", new { page = nextPage , tag = Model.CurrentTag})">NEXT PAGE</a>
+                <a class="btn btn-default" href="@Url.Action("Index", "Blog", new { page = nextPage, tag = Model.CurrentTag, search = Model.CurrentSearch })">NEXT PAGE</a>
             </div>
         </div>
 
@@ -60,10 +70,16 @@
             @{ Html.RenderAction("TagsCounts", "Tag"); }
         </div>
         <div class="row">
-            @{ Html.RenderAction("LatestArticles", "Blog", new{ tag = Model.CurrentTag});}
+            @{ Html.RenderAction("LatestsComments", "Blog", new {tag = Model.CurrentTag});}
+        </div>
+        <div class="row">
+            @{ Html.RenderAction("LatestArticles", "Blog", new { tag = Model.CurrentTag, days = 14 });}
         </div>
         <div class="row">
             @{ Html.RenderAction("MostPopular", "Blog", new { tag = Model.CurrentTag });}
+        </div>
+        <div class="row">
+            @{ Html.RenderAction("MostCommented", "Blog", new { tag = Model.CurrentTag, days = 14 });}
         </div>
     </div>
 </div>

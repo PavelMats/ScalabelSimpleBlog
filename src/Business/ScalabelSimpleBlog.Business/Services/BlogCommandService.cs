@@ -3,6 +3,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using ScalabelSimpleBlog.Business.Models.BlogService;
 using ScalabelSimpleBlog.Business.Services.Contracts;
+using ScalabelSimpleBlog.Data.Entities;
 using ScalabelSimpleBlog.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -53,9 +54,20 @@ namespace ScalabelSimpleBlog.Business.Services
             articleEntity.Body = addArticleModel.Body;
             articleEntity.TeaserText = addArticleModel.TeaderText;
             articleEntity.Header = addArticleModel.Header;
-            articleEntity.CreatedDate = DateTime.Now;
+            articleEntity.CreatedDate = DateTime.UtcNow;
 
             context.Articles.Add(articleEntity);
+            context.SaveChanges();
+        }
+
+        public void CreatComment(AddCommentModel addCommentModel)
+        {
+            var commentEntity = new Comment();
+            commentEntity.ArticleId = addCommentModel.ArticleId;
+            commentEntity.AuthorId = addCommentModel.AuthorId;
+            commentEntity.Body = addCommentModel.Body;
+            commentEntity.CreatedDate = DateTime.UtcNow;
+            context.Comments.Add(commentEntity);
             context.SaveChanges();
         }
     }

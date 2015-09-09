@@ -52,6 +52,7 @@ namespace ScalabelSimpleBlog.App_Start
             container.RegisterType<ITagReadService, TagReadService>();
 
             container.RegisterType<IArticleStatiscticService, ArticleStatiscticService>();
+            container.RegisterType<IUserStatitisticService, UserStatitisticService>();
         }
     }
 }

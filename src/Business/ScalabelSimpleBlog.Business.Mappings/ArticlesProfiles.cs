@@ -13,10 +13,17 @@ namespace ScalabelSimpleBlog.Business.Mappings
             CreateMap<Article, Dto.HomeCotrollerDto.LatestArticlesDto>();
             CreateMap<Article, Dto.BlogControllerDto.LatestArticlesDto>()
                 .ForMember(dest => dest.DateFrom, opt => opt.MapFrom(x => x.EditedDate.HasValue ? x.EditedDate.Value : x.CreatedDate));
-            CreateMap<Article, ArticlesIndexDto>();
+            CreateMap<Article, ArticlesIndexDto>()
+                .ForMember(dest => dest.Author, opt => opt.MapFrom(x => x.Author.FirstName + " " + x.Author.LastName))
+                .ForMember(desc => desc.CommentsCount, opt => opt.MapFrom(x => x.Comments.Count()))
+                .ForMember(dest => dest.ClicksCount, opt => opt.MapFrom(x => x.StatiscticArticleViews.Count()));
+
             CreateMap<Article, FullArticleDto>();
             CreateMap<Article, MostPopularArticleDto>()
                 .ForMember(dest => dest.ClicksCount, opt => opt.MapFrom(x => x.StatiscticArticleViews.Count()));
+
+            CreateMap<Article, MostCommentedArticleDto>()
+                .ForMember(dest => dest.CommentCount, opt => opt.MapFrom(x => x.Comments.Count()));
 
             CreateMap<Article, MyArticlesDto>()
                 .ForMember(dest => dest.ClicksCount, opt => opt.MapFrom(x => x.StatiscticArticleViews.Count()));
