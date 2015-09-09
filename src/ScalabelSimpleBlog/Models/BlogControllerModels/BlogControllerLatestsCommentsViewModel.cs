@@ -3,8 +3,8 @@ using ScalabelSimpleBlog.Business.Dto.BlogControllerDto;
 
 namespace ScalabelSimpleBlog.Models.BlogControllerModels
 {
-    public class BlogControllerMostCommentedModel
+    public class BlogControllerLatestsCommentsViewModel
     {
-        public IEnumerable<MostCommentedArticleDto> Articles { get; set; }
+        public IEnumerable<LatestCommentDto> Comments { get; set; }
     }
 }

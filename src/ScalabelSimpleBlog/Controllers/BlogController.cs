@@ -157,9 +157,13 @@ namespace ScalabelSimpleBlog.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult MostCommented(int take = 5, int? tag = null)
+        public ActionResult MostCommented(int take = 5, int? tag = null, int? days = 14)
         {
-            var model = BlogControllerMostCommentedModel();
+            var model = new BlogControllerMostCommentedModel();
+
+            model.Articles = this.blogReadService.GetMostCommented<MostCommentedArticleDto>(take, tag, days);
+
+            return PartialView(model);
         }
 
 
@@ -179,6 +183,16 @@ namespace ScalabelSimpleBlog.Controllers
             var model = new BlogControllerLetestArticlesModel();
 
             model.Articles = this.blogReadService.GetLatest<LatestArticlesDto>(take, tag);
+
+            return PartialView(model);
+        }
+
+        [ChildActionOnly]
+        public ActionResult LatestsComments(int take = 10, int? tag = null)
+        {
+            var model = new BlogControllerLatestsCommentsViewModel();
+
+            model.Comments = this.blogReadService.GetLatestComments<LatestCommentDto>(take, tag);
 
             return PartialView(model);
         }
