@@ -52,6 +52,12 @@
   <ItemGroup>
     <None Include="RadnomBrowseBlog.webtest" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ScalabelSimpleBlog.WebTests.Tools\ScalabelSimpleBlog.WebTests.Tools.csproj">
+      <Project>{1622f896-4202-4c63-804a-c854d763284e}</Project>
+      <Name>ScalabelSimpleBlog.WebTests.Tools</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
