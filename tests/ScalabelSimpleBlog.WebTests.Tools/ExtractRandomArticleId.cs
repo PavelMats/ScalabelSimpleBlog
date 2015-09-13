@@ -25,10 +25,32 @@ namespace ScalabelSimpleBlog.WebTests.Tools
             if (e.Response.HtmlDocument != null)
             {
                 var document = e.Response.HtmlDocument;
+                var randomArticles = new List<HtmlTag>();
+                foreach(var anchor in document.GetFilteredHtmlTags(new string[] { "a" }))
+                {
+                    var anchorClass = anchor.GetAttributeValueAsString("class");
+                    if(!string.IsNullOrWhiteSpace(anchorClass) && anchorClass.Contains("show-article-link"))
+                    {
+                        randomArticles.Add(anchor);
+                    }
+                }
+
+                if(randomArticles.Count > 0)
+                {
+                    var randomArticle = randomArticles.Random();
+                    var articleId = randomArticle.GetAttributeValueAsString("data-article-id");
+                    e.WebTest.Context.Add(this.ContextParameterName, articleId);
+                    e.Success = true;
+                    return;
+                }
+                e.Success = true;
+                return;
                 // https://msdn.microsoft.com/en-us/library/ms243179.aspx  "show-article-link"
                 var articles = document.GetFilteredHtmlTags("a").Where(x => x.GetAttributeValueAsString("class").Contains("show-article-link")).ToList();
 
-                if(articles.Count > 0)
+                
+
+                if (articles.Count > 0)
                 {
                     var randomArticle = articles.Random();
                     // data-article-id
