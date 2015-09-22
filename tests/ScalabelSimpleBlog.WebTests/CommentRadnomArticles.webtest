@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WebTest Name="RadnomBrowseBlog" Id="97cc53c4-9791-414b-93bd-773728eb2992" Owner="" Priority="2147483647" Enabled="True" CssProjectStructure="" CssIteration="" Timeout="0" WorkItemIds="" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" Description="" CredentialUserName="" CredentialPassword="" PreAuthenticate="True" Proxy="default" StopOnError="False" RecordedResultFile="RadnomBrowseBlog.3b3a5385-883c-4793-a12a-f3815a20f799.rec.webtestresult" ResultsLocale="">
+<WebTest Name="CommentRadnomArticles" Id="97cc53c4-9791-414b-93bd-773728eb2992" Owner="" Priority="2147483647" Enabled="True" CssProjectStructure="" CssIteration="" Timeout="0" WorkItemIds="" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" Description="" CredentialUserName="" CredentialPassword="" PreAuthenticate="True" Proxy="default" StopOnError="False" RecordedResultFile="RadnomBrowseBlog.3b3a5385-883c-4793-a12a-f3815a20f799.rec.webtestresult" ResultsLocale="">
   <Items>
     <Request Method="GET" Guid="9e71a2ca-7417-45ea-a135-86183662ea04" Version="1.1" Url="{{StagingWebServer}}/" ThinkTime="28" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False" />
     <Comment CommentText="Login" />
@@ -16,7 +16,7 @@
         </ExtractionRule>
       </ExtractionRules>
     </Request>
-    <Request Method="POST" Guid="3c4a3bfc-dc63-451b-9574-4f4b7061ce72" Version="1.1" Url="{{StagingWebServer}}/Account/Login" ThinkTime="3" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="{{StagingWebServer}}/Home" ReportingName="" IgnoreHttpStatusCode="False">
+    <Request Method="POST" Guid="3c4a3bfc-dc63-451b-9574-4f4b7061ce72" Version="1.1" Url="{{StagingWebServer}}/Account/Login" ThinkTime="3" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="{{StagingWebServer}}/" ReportingName="" IgnoreHttpStatusCode="False">
       <Headers>
         <Header Name="Referer" Value="{{StagingWebServer}}/Account/Login" />
       </Headers>
@@ -118,7 +118,7 @@
           </Headers>
           <FormPostHttpBody>
             <FormPostParameter Name="Comment.ArticleId" Value="{{RandomArticleId}}" RecordedValue="75652" CorrelationBinding="" UrlEncode="True" />
-            <FormPostParameter Name="Comment.Body" Value="test comment" RecordedValue="test comment" CorrelationBinding="" UrlEncode="True" />
+            <FormPostParameter Name="Comment.Body" Value="{{Comments.TestComments#csv.Comment}}" RecordedValue="test comment" CorrelationBinding="" UrlEncode="True" />
           </FormPostHttpBody>
         </Request>
         <Request Method="GET" Guid="8727fd8a-8f0d-41c1-9133-5d28055b20fd" Version="1.1" Url="{{StagingWebServer}}/" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
@@ -133,6 +133,13 @@
       </Items>
     </Loop>
   </Items>
+  <DataSources>
+    <DataSource Name="Comments" Provider="Microsoft.VisualStudio.TestTools.DataSource.CSV" Connection="|DataDirectory|\TestComments.csv">
+      <Tables>
+        <DataSourceTable Name="TestComments#csv" SelectColumns="SelectOnlyBoundColumns" AccessMethod="Random" />
+      </Tables>
+    </DataSource>
+  </DataSources>
   <ContextParameters>
     <ContextParameter Name="RandomTag" Value="" />
     <ContextParameter Name="CurrentPage" Value="" />
