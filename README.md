@@ -16,4 +16,13 @@ Web Test cases:
 * Comment Random Article 
  
 
+Test result 
+duration 10 min
 
+|App/branch | 200 users|  400 Users |
+|-----------|---------------------------|-----|
+|Web App    | Requests/Sec 4.01|Requests/Sec 6.03 |
+|No Async   | Pages/Sec 1.99|Pages/Sec 2.21  |
+|ONLY SQL   | Avg. Page Time (sec) 78.4 |Avg. Page Time (sec) 109 |
+|   | Avg. Response Time (sec) 44.8  | Avg. Response Time (sec) 62.0 | 
+|-----------|---------------------------|---|
