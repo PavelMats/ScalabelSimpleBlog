@@ -25,4 +25,4 @@ duration 10 min
 |No Async   | Pages/Sec 1.99|Pages/Sec 2.21  |
 |ONLY SQL   | Avg. Page Time (sec) 78.4 |Avg. Page Time (sec) 109 |
 |   | Avg. Response Time (sec) 44.8  | Avg. Response Time (sec) 62.0 | 
-|-----------|---------------------------|---|
+| |Errors: 0 | Errors: 0 |
