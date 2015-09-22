@@ -90,10 +90,12 @@ namespace ScalabelSimpleBlog.Controllers
         {
             if (this.ModelState.IsValid)
             {
+                // Set Random tag just to simplify app 
                 var random = new Random();
                 var tagIds = new List<int>();
                 tagIds.Add(random.Next(1, 8));
                 tagIds.Add(random.Next(1, 8));
+
                 this.blogCommandService.CreatArticle(new AddArticleModel
                 {
                     Header = article.Header, 
