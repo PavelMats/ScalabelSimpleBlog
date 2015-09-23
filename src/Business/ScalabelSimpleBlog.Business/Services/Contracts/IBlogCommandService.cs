@@ -9,12 +9,12 @@ namespace ScalabelSimpleBlog.Business.Services.Contracts
 {
     public interface IBlogCommandService
     {
-        void UpdateArticle(int articleId, UpdateArticleModel articleUpdateModel);
+        Task UpdateArticle(int articleId, UpdateArticleModel articleUpdateModel);
 
         IEnumerable<T> GetLatest<T>(int take);
 
-        void CreatArticle(AddArticleModel addArticleModel);
+        Task CreatArticle(AddArticleModel addArticleModel);
 
-        void CreatComment(AddCommentModel addCommentModel);
+        Task CreatComment(AddCommentModel addCommentModel);
     }
 }

@@ -7,8 +7,8 @@ namespace ScalabelSimpleBlog.Business.Services
 {
     public interface IArticleStatiscticService
     {
-        void LogAnonymus(int articleId);
+        Task LogAnonymus(int articleId);
 
-        void LogUser(int articleId, string userId);
+        Task LogUser(int articleId, string userId);
     }
 }

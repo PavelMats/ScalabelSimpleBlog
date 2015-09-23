@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ScalabelSimpleBlog.Entities;
+using System.Threading.Tasks;
 
 namespace ScalabelSimpleBlog.Business.Services
 {
@@ -23,7 +24,7 @@ namespace ScalabelSimpleBlog.Business.Services
             this.mapper = mapper;
         }
 
-        public void UpdateArticle(int articleId, UpdateArticleModel articleUpdateModel)
+        public async Task UpdateArticle(int articleId, UpdateArticleModel articleUpdateModel)
         {
             var article = context.Articles.FirstOrDefault(x => x.Id == articleId);
             article.Body = articleUpdateModel.Body;
@@ -34,7 +35,7 @@ namespace ScalabelSimpleBlog.Business.Services
 
             var entry = context.Entry(article);
             entry.State = EntityState.Modified;
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetLatest<T>(int take)
@@ -47,7 +48,7 @@ namespace ScalabelSimpleBlog.Business.Services
                 .ToList();
         }
 
-        public void CreatArticle(AddArticleModel addArticleModel)
+        public async Task CreatArticle(AddArticleModel addArticleModel)
         {
             var articleEntity = new Article();
             articleEntity.AuthorId = addArticleModel.AuthorId;
@@ -56,7 +57,7 @@ namespace ScalabelSimpleBlog.Business.Services
             articleEntity.Header = addArticleModel.Header;
             articleEntity.CreatedDate = DateTime.UtcNow;
 
-            var tags = context.Tags.Where(x => addArticleModel.TagsId.Contains(x.Id));
+            var tags = await context.Tags.Where(x => addArticleModel.TagsId.Contains(x.Id)).ToListAsync();
             foreach(var tag in tags)
             {
                 articleEntity.Tags.Add(tag);
@@ -64,10 +65,10 @@ namespace ScalabelSimpleBlog.Business.Services
             }
 
             context.Articles.Add(articleEntity);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void CreatComment(AddCommentModel addCommentModel)
+        public async Task CreatComment(AddCommentModel addCommentModel)
         {
             var commentEntity = new Comment();
             commentEntity.ArticleId = addCommentModel.ArticleId;
@@ -75,7 +76,7 @@ namespace ScalabelSimpleBlog.Business.Services
             commentEntity.Body = addCommentModel.Body;
             commentEntity.CreatedDate = DateTime.UtcNow;
             context.Comments.Add(commentEntity);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 }

@@ -10,6 +10,7 @@ using ScalabelSimpleBlog.Models.BlogControllerModels;
 using UpdateArticleRequest = ScalabelSimpleBlog.Models.BlogControllerModels.UpdateArticleRequest;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ScalabelSimpleBlog.Controllers
 {
@@ -28,13 +29,13 @@ namespace ScalabelSimpleBlog.Controllers
 
         //
         // GET: /Blog/
-        public ActionResult Index(int page = 1, int perPage = 20, int? tag = null, string search = null)
+        public async Task<ActionResult> Index(int page = 1, int perPage = 20, int? tag = null, string search = null)
         {
 
             var model = new BlogControllerIndexModel();
             var skip = perPage*(page - 1);
 
-            model.Articles = this.blogReadService.GetArticles<ArticlesIndexDto>(new GetBlogArticlesModel(perPage, skip, tag, search));
+            model.Articles = await this.blogReadService.GetArticlesAsync<ArticlesIndexDto>(new GetBlogArticlesModel(perPage, skip, tag, search));
             model.CurrentPage = page;
             model.CurrentTag = tag;
             model.CurrentSearch = search;
@@ -42,36 +43,36 @@ namespace ScalabelSimpleBlog.Controllers
             return View(model);
         }
 
-        public ActionResult Article(int articleId)
+        public async Task<ActionResult> Article(int articleId)
         {
             if (this.User.Identity.IsAuthenticated)
             {
                 var userId = this.User.Identity.GetUserId();
-                this.articleStatiscticService.LogUser(articleId, userId);
+                await this.articleStatiscticService.LogUser(articleId, userId);
             }
             else
             {
-                this.articleStatiscticService.LogAnonymus(articleId);
+                await this.articleStatiscticService.LogAnonymus(articleId);
             }
 
             var model = new BlogControllerArticleViewModel();
 
-            model.Article = this.blogReadService.GetArticleById<FullArticleDto>(articleId);
+            model.Article = await this.blogReadService.GetArticleByIdAsync<FullArticleDto>(articleId);
 
-            model.Comments = this.blogReadService.GetCommantsForArticle<ArticleCommantDto>(articleId);
+            model.Comments = await this.blogReadService.GetCommantsForArticleAsync<ArticleCommantDto>(articleId);
             model.Comment = new AddCommentRequest {ArticleId = articleId};
             return View(model);
         }
 
         [Authorize]
         [HttpGet]
-        public ActionResult MyArticles()
+        public async Task<ActionResult> MyArticles()
         {
             var model = new MyArticlesBlodViewModel();
 
             var userId = this.User.Identity.GetUserId();
 
-            model.Articles = this.blogReadService.GetArticlesByUser<MyArticlesDto>(userId);
+            model.Articles = await this.blogReadService.GetArticlesByUserAsync<MyArticlesDto>(userId);
 
             return View(model);
         }
@@ -86,7 +87,7 @@ namespace ScalabelSimpleBlog.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddArticle(AddArticleRequest article)
+        public async Task<ActionResult> AddArticle(AddArticleRequest article)
         {
             if (this.ModelState.IsValid)
             {
@@ -96,7 +97,7 @@ namespace ScalabelSimpleBlog.Controllers
                 tagIds.Add(random.Next(1, 8));
                 tagIds.Add(random.Next(1, 8));
 
-                this.blogCommandService.CreatArticle(new AddArticleModel
+                await this.blogCommandService.CreatArticle(new AddArticleModel
                 {
                     Header = article.Header, 
                     Body = article.Body,
@@ -113,24 +114,24 @@ namespace ScalabelSimpleBlog.Controllers
         [HttpGet]
         [Authorize]
         [ActionName("UpdateArticle")]
-        public ActionResult GetForUpdateArtile(int articleId)
+        public async Task<ActionResult> GetForUpdateArtile(int articleId)
         {
             var model = new UpdateArticleViewModel();
 
-            model.Article = this.blogReadService.GetArticleById<UpdateArticleDto>(articleId);
+            model.Article = await this.blogReadService.GetArticleByIdAsync<UpdateArticleDto>(articleId);
 
             return View(model);
         }
 
         [HttpPost]
         [Authorize]
-        public ActionResult UpdateArticle(UpdateArticleRequest article)
+        public async Task<ActionResult> UpdateArticle(UpdateArticleRequest article)
         {
             var model = new UpdateArticleViewModel();
 
             if (this.ModelState.IsValid)
             {
-                this.blogCommandService.UpdateArticle(article.Id, new UpdateArticleModel
+                await this.blogCommandService.UpdateArticle(article.Id, new UpdateArticleModel
                 {
                     Body = article.Body,
                     Header = article.Header,
@@ -153,9 +154,9 @@ namespace ScalabelSimpleBlog.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddComment(AddCommentRequest comment)
+        public async Task<ActionResult> AddComment(AddCommentRequest comment)
         {
-            this.blogCommandService.CreatComment(new AddCommentModel
+            await this.blogCommandService.CreatComment(new AddCommentModel
             {
                 ArticleId = comment.ArticleId,
                 Body = comment.Body, 
@@ -166,42 +167,42 @@ namespace ScalabelSimpleBlog.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult MostCommented(int take = 5, int? tag = null, int? days = 14)
+        public async Task<ActionResult> MostCommented(int take = 5, int? tag = null, int? days = 14)
         {
             var model = new BlogControllerMostCommentedModel();
 
-            model.Articles = this.blogReadService.GetMostCommented<MostCommentedArticleDto>(take, tag, days);
+            model.Articles = await this.blogReadService.GetMostCommented<MostCommentedArticleDto>(take, tag, days);
 
             return PartialView(model);
         }
 
 
         [ChildActionOnly]
-        public ActionResult MostPopular(int take = 10, int? tag = null, int? days = 14)
+        public async Task<ActionResult> MostPopular(int take = 10, int? tag = null, int? days = 14)
         {
             var model = new BlogControllerMostPopularViewModel();
 
-            model.Articles = this.blogReadService.GetMostPopular<MostPopularArticleDto>(take, tag, days);
+            model.Articles = await this.blogReadService.GetMostPopular<MostPopularArticleDto>(take, tag, days);
 
             return PartialView(model);
         }
 
         [ChildActionOnly]
-        public ActionResult LatestArticles(int take = 10, int? tag = null)
+        public async  Task<ActionResult> LatestArticles(int take = 10, int? tag = null)
         {
             var model = new BlogControllerLetestArticlesModel();
 
-            model.Articles = this.blogReadService.GetLatest<LatestArticlesDto>(take, tag);
+            model.Articles = await this.blogReadService.GetLatest<LatestArticlesDto>(take, tag);
 
             return PartialView(model);
         }
 
         [ChildActionOnly]
-        public ActionResult LatestsComments(int take = 10, int? tag = null)
+        public async Task<ActionResult> LatestsComments(int take = 10, int? tag = null)
         {
             var model = new BlogControllerLatestsCommentsViewModel();
 
-            model.Comments = this.blogReadService.GetLatestComments<LatestCommentDto>(take, tag);
+            model.Comments = await this.blogReadService.GetLatestComments<LatestCommentDto>(take, tag);
 
             return PartialView(model);
         }

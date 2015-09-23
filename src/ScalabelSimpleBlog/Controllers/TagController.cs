@@ -2,6 +2,7 @@
 using ScalabelSimpleBlog.Business.Dto.TagControllerDto;
 using ScalabelSimpleBlog.Business.Read;
 using ScalabelSimpleBlog.Models.TagControllerModels;
+using System.Threading.Tasks;
 
 namespace ScalabelSimpleBlog.Controllers
 {
@@ -21,20 +22,20 @@ namespace ScalabelSimpleBlog.Controllers
             return View();
         }
 
-        public ActionResult TagsByArticle(int articleId)
+        public async Task<ActionResult> TagsByArticle(int articleId)
         {
             var model = new TagsByArticleViewModel();
 
-            model.Tags = this.tagReadService.GetTagsByArticle<TagByArticleId>(articleId);
+            model.Tags = await this.tagReadService.GetTagsByArticleAsync<TagByArticleId>(articleId);
 
             return PartialView(model);
         }
 
-        public ActionResult TagsCounts(int? tag = null)
+        public async Task<ActionResult> TagsCounts(int? tag = null)
         {
             var model = new TagControllerTagsCountsModel
             {
-                TagsList = this.tagReadService.GetTags<TagsListWithCountDto>(),
+                TagsList = await this.tagReadService.GetTagsAsync<TagsListWithCountDto>(),
                 CurrentTag = tag
             };
 
