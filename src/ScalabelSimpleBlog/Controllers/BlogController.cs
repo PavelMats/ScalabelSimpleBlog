@@ -8,6 +8,8 @@ using ScalabelSimpleBlog.Business.Services;
 using ScalabelSimpleBlog.Business.Services.Contracts;
 using ScalabelSimpleBlog.Models.BlogControllerModels;
 using UpdateArticleRequest = ScalabelSimpleBlog.Models.BlogControllerModels.UpdateArticleRequest;
+using System;
+using System.Collections.Generic;
 
 namespace ScalabelSimpleBlog.Controllers
 {
@@ -88,12 +90,19 @@ namespace ScalabelSimpleBlog.Controllers
         {
             if (this.ModelState.IsValid)
             {
+                // Set Random tag just to simplify app 
+                var random = new Random();
+                var tagIds = new List<int>();
+                tagIds.Add(random.Next(1, 8));
+                tagIds.Add(random.Next(1, 8));
+
                 this.blogCommandService.CreatArticle(new AddArticleModel
                 {
                     Header = article.Header, 
                     Body = article.Body,
                     TeaderText = article.TeaserText,
-                    AuthorId =  this.User.Identity.GetUserId()
+                    AuthorId =  this.User.Identity.GetUserId(),
+                    TagsId = tagIds
                 });
                 return RedirectToAction("MyArticles"); 
             }

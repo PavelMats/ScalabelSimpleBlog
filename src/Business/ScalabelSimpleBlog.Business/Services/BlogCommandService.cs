@@ -56,6 +56,13 @@ namespace ScalabelSimpleBlog.Business.Services
             articleEntity.Header = addArticleModel.Header;
             articleEntity.CreatedDate = DateTime.UtcNow;
 
+            var tags = context.Tags.Where(x => addArticleModel.TagsId.Contains(x.Id));
+            foreach(var tag in tags)
+            {
+                articleEntity.Tags.Add(tag);
+                tag.Articles.Add(articleEntity);
+            }
+
             context.Articles.Add(articleEntity);
             context.SaveChanges();
         }

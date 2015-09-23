@@ -44,7 +44,7 @@
                         @item.TeaserText
                     </p>
                     <p>Author: @item.Author  Clicks: @item.ClicksCount  Comment: @item.CommentsCount</p>
-                    <p><a class="btn btn-default" href="@Url.Action("Article", "Blog", new { articleId = item.Id })">More &raquo;</a></p>
+                    <p><a class="btn btn-default show-article-link" data-article-id="@item.Id" href="@Url.Action("Article", "Blog", new { articleId = item.Id })">More &raquo;</a></p>
                 </div>
             </div>
         }
