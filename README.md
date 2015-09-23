@@ -14,3 +14,6 @@ Web Test cases:
 * Add Article 
 * Random Browse Blog 
 * Comment Random Article 
+
+Branching: 
+* dev-befor - starting point Web App + MS SQL
