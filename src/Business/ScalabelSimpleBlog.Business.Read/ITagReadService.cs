@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ScalabelSimpleBlog.Business.Read
 {
     public interface ITagReadService
     {
-        IEnumerable<TResult> GetTags<TResult>();
+        Task<IEnumerable<TResult>> GetTagsAsync<TResult>();
 
-        IEnumerable<TResult> GetTagsByArticle<TResult>(int articleId);
+        Task<IEnumerable<TResult>> GetTagsByArticleAsync<TResult>(int articleId);
     }
 }

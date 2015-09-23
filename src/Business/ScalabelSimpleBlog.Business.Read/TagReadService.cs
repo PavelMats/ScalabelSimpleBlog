@@ -2,6 +2,9 @@
 using System.Linq;
 using AutoMapper.QueryableExtensions;
 using ScalabelSimpleBlog.Data.Repositories;
+using System.Threading.Tasks;
+using System.Data.Entity;
+using System;
 
 namespace ScalabelSimpleBlog.Business.Read
 {
@@ -14,19 +17,18 @@ namespace ScalabelSimpleBlog.Business.Read
             this.context = context;
         }
 
-
-        public IEnumerable<TResult> GetTags<TResult>()
+        public async Task<IEnumerable<TResult>> GetTagsAsync<TResult>()
         {
-            return context.Tags.OrderByDescending(x => x.Articles.Count()).Project().To<TResult>().ToList();
+            return await context.Tags.OrderByDescending(x => x.Articles.Count()).Project().To<TResult>().ToListAsync();
         }
 
-        public IEnumerable<TResult> GetTagsByArticle<TResult>(int articleId)
+        public async Task<IEnumerable<TResult>> GetTagsByArticleAsync<TResult>(int articleId)
         {
             return
-                context.Tags
+                await context.Tags
                     .Where(x => x.Articles.Any(article => article.Id == articleId))
                     .ProjectTo<TResult>()
-                    .ToList();
+                    .ToListAsync();
         }
     }
 }

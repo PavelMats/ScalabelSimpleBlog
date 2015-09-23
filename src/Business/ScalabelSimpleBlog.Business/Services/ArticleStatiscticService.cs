@@ -1,6 +1,7 @@
 ﻿using System;
 using ScalabelSimpleBlog.Data.Entities;
 using ScalabelSimpleBlog.Data.Repositories;
+using System.Threading.Tasks;
 
 namespace ScalabelSimpleBlog.Business.Services
 {
@@ -13,23 +14,23 @@ namespace ScalabelSimpleBlog.Business.Services
             this.context = context;
         }
 
-        public void LogAnonymus(int articleId)
+        public async Task LogAnonymus(int articleId)
         {
             var log = new StatiscticArticleView();
             log.ArticleId = articleId;
             log.Time = DateTime.Now;
             context.StatiscticArticleViews.Add(log);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void LogUser(int articleId, string userId)
+        public async Task LogUser(int articleId, string userId)
         {
             var log = new StatiscticArticleView();
             log.ArticleId = articleId;
             log.UserId = userId;
             log.Time = DateTime.Now;
             context.StatiscticArticleViews.Add(log);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 }

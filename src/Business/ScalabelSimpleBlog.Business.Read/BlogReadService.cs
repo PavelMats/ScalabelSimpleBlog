@@ -6,6 +6,8 @@ using AutoMapper.QueryableExtensions;
 using ScalabelSimpleBlog.Business.Read.Models;
 using ScalabelSimpleBlog.Data.Repositories;
 using ScalabelSimpleBlog.Entities;
+using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace ScalabelSimpleBlog.Business.Read
 {
@@ -20,50 +22,51 @@ namespace ScalabelSimpleBlog.Business.Read
             this.context = context;
         }
 
-        public IEnumerable<TResult> GetArticles<TResult>(GetBlogArticlesModel model)
+        public async Task<IEnumerable<TResult>> GetArticlesAsync<TResult>(GetBlogArticlesModel model)
         {
-            return this.context.Articles
+            var query = this.context.Articles
                        .WhereTag(model.Tag)
                        .WhereSearch(model.Search)
                        .OrderByDescending(x => x.CreatedDate)
-                       .Skip(model.Skip)       
+                       .Skip(model.Skip)
                        .Take(model.Take)
                        .Project()
-                       .To<TResult>()
-                       .ToList();
+                       .To<TResult>();
+
+            return await query.ToListAsync();
         }
 
-        public IEnumerable<TResult> GetLatest<TResult>(int take, int? tag)
+        public async Task<IEnumerable<TResult>> GetLatest<TResult>(int take, int? tag)
         {
-            return this.context.Articles
+            return await this.context.Articles
                                .WhereTag(tag)
                                .OrderByDescending(x => x.CreatedDate)
                                .Skip(0)
                                .Take(take)
                                .Project().To<TResult>()
-                               .ToList();
+                               .ToListAsync();
         }
 
-        public IEnumerable<TResult> GetLatestComments<TResult>(int take, int? tagId)
+        public async Task<IEnumerable<TResult>> GetLatestComments<TResult>(int take, int? tagId)
         {
-            return this.context.Comments.OrderByDescending(x => x.CreatedDate)
+            return await this.context.Comments.OrderByDescending(x => x.CreatedDate)
                 .Where(x => (tagId == null || x.Article.Tags.Any(t => t.Id == tagId.Value)))
                 .Skip(0)
                 .Take(take)
                 .ProjectTo<TResult>()
-                .ToList();
+                .ToListAsync();
         }
 
-        public TResult GetArticleById<TResult>(int articleId)
+        public async Task<TResult> GetArticleByIdAsync<TResult>(int articleId)
         {
-            var article = this.context.Articles.FirstOrDefault(a => a.Id == articleId);
+            var article = await this.context.Articles.FirstOrDefaultAsync(a => a.Id == articleId);
 
             return this.mapper.Map<TResult>(article);
         }
 
-        public IEnumerable<TResult> GetMostPopular<TResult>(int take, int? tagId, int? days)
+        public async Task<IEnumerable<TResult>> GetMostPopular<TResult>(int take, int? tagId, int? days)
         {
-            return
+            return await 
                 this.context.Articles
                     .OrderByDescending(x => x.StatiscticArticleViews.Count())
                     .WhereTag(tagId)
@@ -71,24 +74,24 @@ namespace ScalabelSimpleBlog.Business.Read
                     .Skip(0)
                     .Take(take)
                     .ProjectTo<TResult>()
-                    .ToList();
+                    .ToListAsync();
         }
 
-        public IEnumerable<TResult> GetArticlesByUser<TResult>(string userId)
+        public async Task<IEnumerable<TResult>> GetArticlesByUserAsync<TResult>(string userId)
         {
-            return this.context.Articles.Where(a => a.AuthorId == userId).OrderByDescending(x => x.CreatedDate).ProjectTo<TResult>().ToList();
+            return await this.context.Articles.Where(a => a.AuthorId == userId).OrderByDescending(x => x.CreatedDate).ProjectTo<TResult>().ToListAsync();
         }
 
-        public IEnumerable<TResult> GetCommantsForArticle<TResult>(int articleId)
+        public async Task<IEnumerable<TResult>> GetCommantsForArticleAsync<TResult>(int articleId)
         {
-            return this.context.Comments.Where(x => x.ArticleId == articleId)
+            return await this.context.Comments.Where(x => x.ArticleId == articleId)
                 .OrderByDescending(x => x.CreatedDate)
-                .ProjectTo<TResult>().ToList();
+                .ProjectTo<TResult>().ToListAsync();
         }
 
-        public IEnumerable<TResult> GetMostCommented<TResult>(int take, int? tag, int? days)
+        public async Task<IEnumerable<TResult>> GetMostCommented<TResult>(int take, int? tag, int? days)
         {
-            return this.context.Articles
+            return await this.context.Articles
                 .OrderByDescending(x => x.Comments.Count())
                 .WhereTag(tag)
                 .WhereDays(days)
@@ -96,7 +99,7 @@ namespace ScalabelSimpleBlog.Business.Read
                 .Take(take)
                 .Project()
                 .To<TResult>()
-                .ToList();
+                .ToListAsync();
         }
     }
 
